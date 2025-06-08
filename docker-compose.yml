@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - .env
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000" # Beispielport für dein Backend
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  # Separater Container für alpaca-trade-api, falls nötig
+  # alpaca_service:
+  #   build:
+  #     context: ./alpaca_service
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./alpaca_service:/app
+  #   env_file:
+  #     - .env
+
+  # Separater Container für yfinance, falls nötig
+  # yfinance_service:
+  #   build:
+  #     context: ./yfinance_service
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./yfinance_service:/app
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env # Für POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
