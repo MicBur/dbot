@@ -1,0 +1,166 @@
+Ich möchte einen Trading Bot bauen äh in Python mit Fast. Dafür möchte ich alles in einem Docker Container haben. Nur die Alpaka Trade. Ah ne, die Alpaka Trade und die Y, die müssen getrennt sein, die müssen also zwei unterschiedlichen Container laufen.
+
+
+
+Das klingt nach einem spannenden Projekt! Ich helfe dir gerne dabei, deinen Trading-Bot mit FastAPI in Docker-Containern zu realisieren.
+
+Zuerst müssen wir die Alpaca Trade API und die Yahoo Finance API in jeweils eigenen Containern zum Laufen bringen. Das bedeutet, dass wir für jede API ein eigenes Dockerfile erstellen und diese dann mit Docker Compose verwalten.
+Hast du bereits Erfahrung mit Docker und Docker Compose?
+
+
+
+
+
+So, pass auf. Und dann würde ich einen Redeserver und Postgress alles auf dem Hauptdocker laufen lassen. Fast soll auf das Front End stellen und soll historische Daten besorgen. Ich habe alles in INV Dateien Gemini Pro API für Google Deep Research, weil ich zu
+
+
+
+Okay, das ist ein guter Plan! Du möchtest also einen Redis-Server und einen PostgreSQL-Server im Haupt-Docker-Container laufen lassen, während FastAPI das Frontend bedient und Yahoo Finance die historischen Daten liefert. Und du hast alle deine API-Schlüssel in ENV-Dateien gespeichert.
+
+Lass uns zuerst die Docker-Container für Alpaca Trade API und Yahoo Finance API erstellen. Hast du bereits ein Dockerfile für eine der APIs?
+
+
+
+
+
+Aktien immer die Top US-Aktien haben will zu den Top US-Aktien, zu den Top 20 US-Aktien will ich dann die Ticker isolieren durch Google Deep Research. Zu den Tickern sollen Sentimentdaten über FMP Financial Market Prep heruntergeladen werden. Und dann soll alles an historischen Daten über Alpaka runtergeladen werden kann, soweit es geht und ergänzt durch Y Finance, weil ich eine deutlich höhere Historia haben. Daraus soll ein Transformer LST
+
+
+
+Okay, das ist ein komplexerer Workflow, aber machbar! Du möchtest also die Top-20-US-Aktien identifizieren, ihre Ticker isolieren, Sentimentdaten von Financial Modeling Prep und historische Daten von Alpaca und Yahoo Finance abrufen und dann ein Transformer-LSTM-Modell trainieren.
+
+Bevor wir ins Detail gehen, lass uns kurz überlegen, wie du die Top-20-Aktien definierst. Gibt es da ein bestimmtes Kriterium, wie z.B. Marktkapitalisierung oder Handelsvolumen?
+
+
+
+
+
+verliert werden. Was vorhersagen bei Alpaka Trade treffen soll.
+
+
+Ah, ich verstehe. Du möchtest also ein Modell trainieren, das Vorhersagen für den Aktienhandel mit Alpaca Trade treffen kann. Das ist ein interessanter Ansatz!
+
+Um dir hier gut helfen zu können, müssen wir uns überlegen, wie du die Performance deines Modells bewerten willst. Hast du da schon eine Metrik im Kopf?
+
+Ach, und denke daran, dass ich keine Finanzberatung bereitstellen kann. Verlasse dich bei Finanzfragen also bitte nicht einfach auf mich.
+
+
+
+
+
+Also, ich würde für das Modell würde ich ein Transformer LSDM Hybridmodell nehmen.
+
+
+Ein Transformer-LSTM-Hybridmodell ist eine interessante Wahl! Es kombiniert die Fähigkeit von Transformer-Modellen, langfristige Abhängigkeiten zu erfassen, mit der Stärke von LSTM-Netzwerken bei sequenziellen Daten. Hast du bereits Erfahrung mit der Implementierung solcher Modelle?
+
+
+
+
+
+Ja, so ein bisschen. Aber jetzt pass auf. Kriegst du das hin, dass du ein Skript schreibst. Äh dass bei Google Deep Research nach den Top US Aktien fragt, diese Top US Aktien äh dann die Ticker daraus isoliert. Äh die isolierten Ticker dann in der Datenbank speichert. So, dann soll FMPM Financial Markt Rap sich aus der Datenbank die Ticker besorgen und zu den Tickern
+
+
+
+Klar, das kriegen wir hin!
+
+Zuerst müssen wir uns überlegen, wie wir die Top-US-Aktien von Google Deep Research abrufen können. Gibt es da eine API oder müssen wir die Daten von einer Webseite scrapen?
+
+
+
+
+
+Daten Daten die letzten zwei Tage runterladen und ebenfalls in der Datenbank speichern. Dann soll Alpaka Trade sich historische Daten und aktuelle Daten von den 20 Tickern, die in der Datenbank sind äh herunterladen und ebenfalls in der Datenbank speichern.
+
+
+
+Verstanden. Du möchtest also ein Skript, das folgende Schritte ausführt:
+
+Abfrage von Google Deep Research nach den Top-US-Aktien.
+Isolation der Ticker-Symbole.
+Speicherung der Ticker-Symbole in einer Datenbank.
+Abruf von Sentimentdaten von Financial Modeling Prep (FMP) für die Ticker-Symbole aus der Datenbank.
+Speicherung der Sentimentdaten in der Datenbank.
+Abruf von historischen und aktuellen Daten von Alpaca Trade für die Ticker-Symbole aus der Datenbank.
+Speicherung der historischen und aktuellen Daten in der Datenbank.
+Lass uns das schrittweise angehen.
+
+
+
+
+
+Dann soll der Anmelcontainer auslösen und Wi-Finanz soll historische Daten runterladen für die 20 Ticker, die in der Datenbank stehen und ebenfalls runterladen. Dann soll aus all den Daten zusammen ein Transformer LSTM Hybridmodell erstellt werden, das für jede Aktie einzeln eine Vorhersage für die nächsten sieben Tage vornimmt.
+
+
+
+Okay, ich verstehe. Du möchtest also ein Skript, das die folgenden Schritte ausführt:
+
+Abfrage von Google Deep Research nach den Top-US-Aktien.
+Isolation der Ticker-Symbole.
+Speicherung der Ticker-Symbole in einer Datenbank.
+Abruf von Sentimentdaten von Financial Modeling Prep (FMP) für die Ticker-Symbole aus der Datenbank.
+Speicherung der Sentimentdaten in der Datenbank.
+Abruf von historischen und aktuellen Daten von Alpaca Trade für die Ticker-Symbole aus der Datenbank.
+Speicherung der historischen und aktuellen Daten in der Datenbank.
+Auslösen eines anderen Containers, der historische Daten von Yahoo Finance für die 20 Ticker-Symbole abruft und in der Datenbank speichert.
+Erstellung eines Transformer-LSTM-Hybridmodells aus allen Daten, das für jede Aktie eine Vorhersage für die nächsten sieben Tage trifft.
+Lass uns das schrittweise angehen.
+
+
+
+
+
+So, das Ganze ist machbar. Richtig?
+
+
+Ja, das ist definitiv machbar! Es ist ein komplexes Projekt, aber mit einer klaren Struktur und den richtigen Tools können wir das schaffen.
+
+
+
+
+
+Okay, dann pass auf. Als Front End möchte ich Fast benutzen mit den 2 Framework.
+
+
+FastAPI ist eine gute Wahl für ein schnelles und effizientes Backend. Und Jinja2 ist super, um dynamische Webseiten zu erstellen. Hast du schon Erfahrung mit diesen Frameworks?
+
+
+
+
+
+so ein bisschen, aber ich will ja auch nur eine Seite haben und auf der Internetseite auf dem Front End was ich laufen lassen will, da möchte ich das mit Jahr 2 machen. Ist das möglich aus Fast raus.
+
+
+
+Ja, das ist möglich! Du kannst Jinja2 problemlos in FastAPI integrieren, um dynamische Webseiten zu erstellen. FastAPI bietet sogar integrierte Unterstützung dafür.
+
+
+
+
+
+das ist doch sehr gut. Ich möchte auf der Webseite meine Daten, die ich bei Alpaka Trade habe. Ich möchte alle mein Portfolio angezeigt haben mit der Anzahl der Tage, die es noch gehalten wird. Ich möchte eine Uhrzeit oben in der Ecke haben. Ich möchte, dass der Bot selber
+
+
+
+Das klingt nach einem guten Plan für dein Frontend! Du möchtest also dein Portfolio von Alpaca Trade anzeigen, inklusive der Haltedauer, und eine Echtzeit-Uhr. Und der Bot soll automatisch handeln, basierend auf den Vorhersagen des Transformer-LSTM-Modells.
+
+
+
+
+
+Ja, das ist richtig und der soll ein Diagramm zeichnen für jede Achse, die er gekauft hat. So, sollte er und jede Nacht soll das Modell trainieren mit neuen Tickern besorgen und so weiter neu angestoßen werden. Ähm sollten bei den Tickern Achsen vorkommen, die ich schon habe, dann sollen lediglich deren Ticker verlängert werden, um weitere deren Kurse verlängert werden, die woher sage ich für weitere 7 Tage. Also
+
+
+
+Okay, das ist ein guter Plan! Du möchtest also ein Diagramm für jede gekaufte Aktie anzeigen und das Modell jede Nacht mit neuen Tickern trainieren. Wenn du bereits Aktien im Portfolio hast, sollen nur deren Kurse für die nächsten sieben Tage vorhergesagt werden.
+
+Lass uns das schrittweise angehen.
+
+
+
+
+
+
+Denkst du, das ist ein großes Problem.
+
+
+Das ist eine interessante Herausforderung! Es könnte etwas komplexer werden, da du sowohl Echtzeitdaten als auch historische Daten und Modellvorhersagen verarbeiten musst. Aber mit der richtigen Planung und Struktur sollte es machbar sein.

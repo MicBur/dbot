@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard] # Wieder hinzugefügt, um den uvicorn-Befehl verfügbar zu machen
+# Füge hier weitere Abhängigkeiten hinzu, z.B. redis, etc.
+asyncpg
+SQLAlchemy
+psycopg2-binary # Standard-Treiber für SQLAlchemy mit PostgreSQL
+pydantic # Standard pydantic ohne email extras
+alpaca-trade-api
+requests # Für direkte HTTP-Anfragen an FMP
+pandas # Für Datenanalyse und gleitende Durchschnitte
+torch
+scikit-learn
+joblib

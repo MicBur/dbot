@@ -19,32 +19,34 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000" # Beispielport für dein Backend
+      - "8000:8000" 
     volumes:
       - ./backend:/app
+      - ./trained_models:/app/trained_models
     env_file:
       - .env
     depends_on:
       - db
       - redis
+      - yfinance_service 
 
   # Separater Container für alpaca-trade-api, falls nötig
   # alpaca_service:
   #   build:
   #     context: ./alpaca_service
   #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./alpaca_service:/app
   #   env_file:
   #     - .env
 
-  # Separater Container für yfinance, falls nötig
-  # yfinance_service:
-  #   build:
-  #     context: ./yfinance_service
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./yfinance_service:/app
+  yfinance_service: # NEU: yfinance Service aktivieren
+    build:
+      context: ./yfinance_service # Pfad zum Docker-Kontext des yfinance-Service
+      dockerfile: Dockerfile    # Name des Dockerfiles im yfinance_service Verzeichnis
+    ports:
+      - "8001:8001"             # Port-Mapping
+    volumes:
+      - ./yfinance_service:/app_yfinance # Mount für Code-Änderungen während der Entwicklung
+    restart: unless-stopped
 
   db:
     image: postgres:15
@@ -59,6 +61,9 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+    volumes: # Optional: Redis-Daten persistent machen
+      - redis_data:/data
 
 volumes:
   postgres_data:
+  redis_data: # Optional: Definiere das Volume für Redis
